@@ -13,21 +13,18 @@ const greenArea = document.querySelector(".green-area");
 const redArea = document.querySelector(".red-area");
 const yellowArea = document.querySelector(".yellow-area");
 const blueArea = document.querySelector(".blue-area");
-
 ```
 
 ###### 2. 'colorOrder' is neverReassigned. Use 'const' instead - (prefer-const)
 
 ```
 let colorOrder = Math.floor(Math.random() *  4);
-
 ```
 
 ###### 3. multiple spaces found before '4'
 
 ```
 let colorOrder = Math.floor(Math.random() *  4);
-
 ```
 
 ###### 4. for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,entries,values} and iterate over the resulting array.
@@ -37,7 +34,6 @@ let colorOrder = Math.floor(Math.random() *  4);
     let elementColor = createColorElement(order[i]);
     lightColor(elementColor, Number(i) + 1);
   }
-
 ```
 
 ###### 5. expected parentheses around arrow function argument
@@ -47,7 +43,6 @@ let colorOrder = Math.floor(Math.random() *  4);
     let elementColor = createColorElement(i);
     lightColor(elementColor, Number(i) + 1);
   })
-
 ```
 
 ###### 6. 'elementColor' is never reassigned. Use 'const' instead
@@ -57,7 +52,6 @@ let colorOrder = Math.floor(Math.random() *  4);
     let elementColor = createColorElement(i);
     lightColor(elementColor, Number(i) + 1);
   })
-
 ```
 
 ###### 7. 'createColorElement' was used before it was defined.
@@ -67,7 +61,7 @@ let colorOrder = Math.floor(Math.random() *  4);
     let elementColor = createColorElement(i);
     lightColor(elementColor, Number(i) + 1);
   })
-
+  
   ...
 
   const createColorElement = (color) => {
@@ -76,7 +70,6 @@ let colorOrder = Math.floor(Math.random() *  4);
   else if (color == 2) return yellowArea;
   else if (color == 3) return blueArea;
 }
-
 ```
 
 ###### 8. expected to return a value at the end of arrow function
@@ -88,7 +81,6 @@ let colorOrder = Math.floor(Math.random() *  4);
   else if (color == 2) return yellowArea;
   else if (color == 3) return blueArea;
 }
-
 ```
 
 ###### 9. Missing semicolon
@@ -107,7 +99,6 @@ const createColorElement = (color) => {
       return greenArea;
   }
 }
-
 ```
 
 after:
@@ -125,7 +116,6 @@ const createColorElement = (color) => {
       return greenArea;
   }
 };
-
 ```
 
 ###### 10. Assignment to function parameter 'time' - (no-param-reassing)
@@ -141,7 +131,6 @@ const lightColor = (element, time) => {
     element.classList.remove('selected')
   });
 }
-
 ```
 
 after:
@@ -167,7 +156,6 @@ clickedOrder.forEach((i, index) => {
       gameOver();
     }
   });
-
 ```
 
 after:
@@ -177,7 +165,6 @@ after:
       gameOver();
     }
   });
-
 ```
 
 ###### 12. Unary operator '++' used - eslint(no-plusplus)
@@ -188,7 +175,6 @@ const nextLevel = () => {
   score++;
   shuffleOrder();
 }
-
 ```
 
 after:
@@ -197,7 +183,6 @@ after:
   score += score;
   shuffleOrder();
 };
-
 ```
 
 ###### 13. Block must not be padded by blank lines - eslint(padded-blocks)
@@ -215,7 +200,6 @@ const click = (color) => {
   }, 250);
 
 };
-
 ```
 
 after:
@@ -229,7 +213,6 @@ const click = (color) => {
     checkOrder();
   }, 250);
 };
-
 ```
 
 
@@ -238,16 +221,16 @@ const click = (color) => {
 
 ## Development Dependencies
 
-- babel/core: "^7.16.7"
-- babel/preset-env: "^7.16.8"
-- testing-library/dom: "^8.11.1"
-- testing-library/jest-dom: "^5.16.1"
-- babel-loader: "^8.2.3"
-- eslint: "^8.6.0"
-- eslint-config-airbnb-base: "^15.0.0"
-- eslint-plugin-import: "^2.25.4"
-- eslint-plugin-jest-dom: "^4.0.1"
-- eslint-plugin-testing-library: "^5.0.3"
-- jest: "^27.4.7"
-- webpack: "^5.66.0"
-- webpack-cli": "^4.9.1"
+- babel/core
+- babel/preset-env
+- testing-library/dom
+- testing-library/jest-dom
+- babel-loader
+- eslint
+- eslint-config-airbnb-base
+- eslint-plugin-import
+- eslint-plugin-jest-dom
+- eslint-plugin-testing-library
+- jest
+- webpack
+- webpack-cli
