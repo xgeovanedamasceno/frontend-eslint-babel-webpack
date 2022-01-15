@@ -7,46 +7,79 @@ let score = 0;
 // 2 = yellow
 // 3 = blue
 
-const greenArea = document.querySelector(".green-area");
-const redArea = document.querySelector(".red-area");
-const yellowArea = document.querySelector(".yellow-area");
-const blueArea = document.querySelector(".blue-area");
+const greenArea = document.querySelector('.green-area');
+const redArea = document.querySelector('.red-area');
+const yellowArea = document.querySelector('.yellow-area');
+const blueArea = document.querySelector('.blue-area');
+
+const createColorElement = (color) => {
+  switch (color) {
+    case 1:
+      return redArea;
+    case 2:
+      return yellowArea;
+    case 3:
+      return blueArea;
+    default:
+      return greenArea;
+  }
+};
+
+const lightColor = (element, time) => {
+  const timeRound = time * 500;
+  setTimeout(() => {
+    element.classList.add('selected');
+  }, timeRound);
+  setTimeout(() => {
+    element.classList.remove('selected');
+  });
+};
 
 const shuffleOrder = () => {
-  let colorOrder = Math.floor(Math.random() *  4);
+  const colorOrder = Math.floor(Math.random() * 4);
   order[order.length] = colorOrder;
   clickedOrder = [];
 
-  for (let i in order) {
-    let elementColor = createColorElement(order[i]);
+  order.forEach((i) => {
+    const elementColor = createColorElement(i);
     lightColor(elementColor, Number(i) + 1);
-  }
-}
-
-const lightColor = (element, time) => {
-  time = time * 500;
-  setTimeout(() => {
-    element.classList.add('selected');
-  }, time - 250);
-  setTimeout(() => {
-    element.classList.remove('selected')
   });
-}
+};
 
-let checkOrder = () => {
-  for (let i in clickedOrder) {
-    if (clickedOrder[i] != order[i]) {
+const nextLevel = () => {
+  score += score;
+  shuffleOrder();
+};
+
+const playGame = () => {
+  alert('Welcome! Starting a new game!');
+  score = 0;
+
+  nextLevel();
+};
+
+const gameOver = () => {
+  alert(`Score ${score}\nYou lose! Game Over!\nClick 'OK' to restart`);
+  order = [];
+  clickedOrder = [];
+
+  playGame();
+};
+
+const checkOrder = () => {
+  clickedOrder.forEach((i, index) => {
+    if (i !== order[index]) {
       gameOver();
-      break;
     }
-  }
-  if (clickedOrder.length == order.length) {
+  });
+
+  if (clickedOrder.length === order.length) {
     alert(`Score: ${score}\nYou're right! Starting next level...`);
     nextLevel();
   }
-}
+};
 
-let click = (color) => {
+const click = (color) => {
   clickedOrder[clickedOrder.length] = color;
   createColorElement(color).classList.add('selected');
 
@@ -54,37 +87,9 @@ let click = (color) => {
     createColorElement(color).classList.remove('selected');
     checkOrder();
   }, 250);
-
-}
-
-const createColorElement = (color) => {
-  if (color == 0) return greenArea;
-  else if (color == 1) return redArea;
-  else if (color == 2) return yellowArea;
-  else if (color == 3) return blueArea;
-}
-
-
-const nextLevel = () => {
-  score++;
-  shuffleOrder();
-}
+};
 
 // game over
-const gameOver = () => {
-  alert(`Score ${score}\nYou lose! Game Over!\nClick 'OK' to restart`);
-  order = [];
-  clickedOrder = [];
-
-  playGame();
-}
-
-const playGame = () => {
-  alert("Welcome! Starting a new game!");
-  score = 0;
-
-  nextLevel();
-}
 
 /* greenArea.addEventListener('click', click(0));
 redArea.addEventListener('click', click(1));
