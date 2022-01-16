@@ -8,6 +8,7 @@ This project has no commercial purpose.
 
 ###### 1. Strings must use singlequote
 
+before:
 ```
 const greenArea = document.querySelector(".green-area");
 const redArea = document.querySelector(".red-area");
@@ -15,20 +16,41 @@ const yellowArea = document.querySelector(".yellow-area");
 const blueArea = document.querySelector(".blue-area");
 ```
 
+after:
+```
+const greenArea = document.querySelector('.green-area');
+const redArea = document.querySelector('.red-area');
+const yellowArea = document.querySelector('.yellow-area');
+const blueArea = document.querySelector('.blue-area');
+```
+
 ###### 2. 'colorOrder' is neverReassigned. Use 'const' instead - (prefer-const)
 
+before:
 ```
 let colorOrder = Math.floor(Math.random() *  4);
+```
+
+after:
+```
+const colorOrder = Math.floor(Math.random() *  4);
 ```
 
 ###### 3. multiple spaces found before '4'
 
+before:
 ```
-let colorOrder = Math.floor(Math.random() *  4);
+const colorOrder = Math.floor(Math.random() *  4);
+```
+
+after:
+```
+const colorOrder = Math.floor(Math.random() * 4);
 ```
 
 ###### 4. for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,entries,values} and iterate over the resulting array.
 
+before:
 ```
   for (let i in order) {
     let elementColor = createColorElement(order[i]);
@@ -36,8 +58,17 @@ let colorOrder = Math.floor(Math.random() *  4);
   }
 ```
 
+after:
+```
+  order.forEach((i) => {
+    const elementColor = createColorElement(i);
+    lightColor(elementColor, Number(i) + 1);
+  });
+```
+
 ###### 5. expected parentheses around arrow function argument
 
+before:
 ```
  order.forEach(i => {
     let elementColor = createColorElement(i);
@@ -45,24 +76,40 @@ let colorOrder = Math.floor(Math.random() *  4);
   })
 ```
 
+after:
+```
+ order.forEach((i) => {
+    let elementColor = createColorElement(i);
+    lightColor(elementColor, Number(i) + 1);
+  })
+```
+
 ###### 6. 'elementColor' is never reassigned. Use 'const' instead
 
+before:
 ```
    order.forEach((i) => {
     let elementColor = createColorElement(i);
+    lightColor(elementColor, Number(i) + 1);
+  })
+```
+
+after:
+```
+   order.forEach((i) => {
+    const elementColor = createColorElement(i);
     lightColor(elementColor, Number(i) + 1);
   })
 ```
 
 ###### 7. 'createColorElement' was used before it was defined.
 
+before:
 ```
    order.forEach((i) => {
     let elementColor = createColorElement(i);
     lightColor(elementColor, Number(i) + 1);
   })
-  
-  ...
 
   const createColorElement = (color) => {
   if (color == 0) return greenArea;
@@ -72,8 +119,25 @@ let colorOrder = Math.floor(Math.random() *  4);
 }
 ```
 
+after:
+```
+const createColorElement = (color) => {
+  if (color == 0) return greenArea;
+  else if (color == 1) return redArea;
+  else if (color == 2) return yellowArea;
+  else if (color == 3) return blueArea;
+}
+
+order.forEach((i) => {
+  let elementColor = createColorElement(i);
+  lightColor(elementColor, Number(i) + 1);
+})
+```
+
+
 ###### 8. expected to return a value at the end of arrow function
 
+before:
 ```
  const createColorElement = (color) => {
   if (color == 0) return greenArea;
@@ -81,6 +145,22 @@ let colorOrder = Math.floor(Math.random() *  4);
   else if (color == 2) return yellowArea;
   else if (color == 3) return blueArea;
 }
+```
+
+after:
+```
+const createColorElement = (color) => {
+  switch (color) {
+    case 1:
+      return redArea;
+    case 2:
+      return yellowArea;
+    case 3:
+      return blueArea;
+    default:
+      return greenArea;
+  }
+};
 ```
 
 ###### 9. Missing semicolon
@@ -144,7 +224,6 @@ const lightColor = (element, time) => {
     element.classList.remove('selected')
   });
 };
-
 ```
 
 ###### 11. Expected '!==' and instead saw '!=' - eslint(eqeqeq)
@@ -156,6 +235,7 @@ clickedOrder.forEach((i, index) => {
       gameOver();
     }
   });
+
 ```
 
 after:
