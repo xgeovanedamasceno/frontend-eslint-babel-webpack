@@ -4,8 +4,7 @@
         "es2021": true
     },
     "extends": [
-        "airbnb-base",
-        "plugin:testing-library/dom"
+        "airbnb-base"
     ],
     "parserOptions": {
         "ecmaVersion": 13,
@@ -13,5 +12,5 @@
     },
     "rules": {
     },
-    "plugins": ["testing-library", "jest-dom"]    
+    "plugins": []    
 }
