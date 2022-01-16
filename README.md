@@ -303,14 +303,9 @@ const click = (color) => {
 
 - babel/core
 - babel/preset-env
-- testing-library/dom
-- testing-library/jest-dom
 - babel-loader
 - eslint
 - eslint-config-airbnb-base
 - eslint-plugin-import
-- eslint-plugin-jest-dom
-- eslint-plugin-testing-library
-- jest
 - webpack
 - webpack-cli
